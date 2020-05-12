@@ -1,0 +1,37 @@
+﻿@page "/movies/edit/{movieid:int}"
+
+<h3>Edit Movie</h3>
+@if(Movie != null)
+{
+    <MovieForm Movie="Movie" onValidSubmit="Edit" NotSelectedGenres="NotSelectedGenres" SelectedGenres="SelectedGenres"/>
+}
+
+@code {
+    [Parameter] public int MovieId { get; set; }
+    private Movie Movie;
+
+    private List<Genre> NotSelectedGenres = new List<Genre>()
+    {
+        new Genre(){Id = 1, Name = "Action"},
+        new Genre(){Id = 2, Name = "Comedy"},
+        new Genre(){Id = 3, Name = "Drama"},
+        new Genre(){Id = 4, Name = "Movie"}
+    };
+
+    private List<Genre> SelectedGenres = new List<Genre>()
+    {
+        new Genre(){Id = 1, Name = "Action"},
+        new Genre(){Id = 4, Name = "Movie"}
+
+    };
+
+
+    protected override void OnInitialized()
+    {
+        Movie = new Movie() { Id = MovieId, Title = "My Movie" };
+    }
+    private void Edit()
+    {
+        Console.WriteLine("editing the movie ..");
+    }
+}
